@@ -1,0 +1,84 @@
+/*
+ * DreamTime.
+ * Copyright (C) DreamNet. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License 3.0 as published by
+ * the Free Software Foundation. See <https://www.gnu.org/licenses/gpl-3.0.html>
+ *
+ * Written by Ivan Bravo Bravo <ivan@dreamnet.tech>, 2019.
+ */
+
+.box {
+  @apply flex flex-col;
+  @apply bg-menus shadow-lg rounded;
+
+  &:not(:last-child) {
+    @apply mb-6;
+  }
+
+  .box__photo {
+    @apply relative bg-center bg-menus-dark;
+    background-image: url('~@/assets/images/inspiration-geometry.png');
+    min-height: 130px;
+
+    &:first-child {
+      @apply rounded-t-lg;
+    }
+
+    .box__photo__content {
+      @apply absolute w-full h-full;
+      @apply bg-black-70;
+    }
+
+    .box__photo__preview {
+      @apply absolute top-0 bottom-0 left-0 right-0 z-10;
+      @apply bg-contain bg-no-repeat bg-center m-3;
+    }
+  }
+
+  .box__header {
+    @apply px-4 py-3 bg-menus-dark rounded-tr rounded-tl;
+
+    &:not(:first-child) {
+      @apply pt-3;
+    }
+
+    .title {
+      @apply font-bold text-white font-title;
+    }
+
+    .subtitle {
+      @apply font-title;
+    }
+  }
+
+  .box__content {
+    @apply flex-1 p-6 leading-relaxed;
+
+    p:not(:last-child) {
+      @apply mb-3;
+    }
+
+    hr {
+      @apply border-menus-light mb-3;
+    }
+
+    a:not(.button) {
+      @apply text-primary;
+    }
+  }
+
+  .box__footer {
+    @apply px-6 py-3;
+    @apply border-t border-menus-light;
+
+    &.box__footer--buttons {
+      @apply flex gap-3;
+
+      .button {
+        @apply flex-1;
+      }
+    }
+  }
+}

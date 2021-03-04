@@ -1,0 +1,93 @@
+/*
+ * DreamTime.
+ * Copyright (C) DreamNet. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License 3.0 as published by
+ * the Free Software Foundation. See <https://www.gnu.org/licenses/gpl-3.0.html>
+ *
+ * Written by Ivan Bravo Bravo <ivan@dreamnet.tech>, 2019.
+ */
+
+.field {
+  @apply mb-4;
+
+  .field-help {
+    @apply block text-xs text-gray-600;
+  }
+}
+
+.label {
+  @apply block font-bold mb-2;
+}
+
+label[for] {
+  @apply cursor-pointer;
+}
+
+input[type="checkbox"] {
+  @apply bg-primary;
+}
+
+.input {
+  @apply border border-transparent bg-input text-snow;
+  @apply p-2 rounded w-full;
+  @include transition('background-color, color, border-color');
+  outline: none !important;
+
+  &:not([readonly]):not([disabled]) {
+    &:hover {
+      @apply border-primary;
+    }
+  }
+
+  &::placeholder {
+    @apply text-common-dark;
+  }
+
+  &[disabled] {
+    @apply opacity-75 cursor-not-allowed;
+  }
+
+  &[readonly] {
+    @apply cursor-default;
+  }
+
+  &.input--sm {
+    @apply text-sm px-2;
+  }
+}
+
+$checkbox-size: 1.5rem;
+
+.checkbox {
+  @apply text-center;
+
+  input[type="checkbox"] {
+    @apply opacity-0 pointer-events-none absolute;
+  }
+
+  input[type="checkbox"] + label {
+    @apply inline-block;
+    width: $checkbox-size;
+    height: $checkbox-size;
+  }
+
+  input[type="checkbox"] + label::before {
+    @apply inline-block rounded border-2 border-transparent bg-input;
+    content: "";
+    vertical-align: bottom;
+    width: $checkbox-size;
+    height: $checkbox-size;
+  }
+
+  input[type="checkbox"]:hover + label::before {
+    @apply border-primary;
+  }
+
+  input[type="checkbox"]:checked + label::before {
+    @apply text-primary text-center border-primary font-black text-xl;
+    content: "✓";
+    line-height: 22px;
+  }
+}

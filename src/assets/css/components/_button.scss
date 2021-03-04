@@ -1,0 +1,115 @@
+/*
+ * DreamTime.
+ * Copyright (C) DreamNet. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License 3.0 as published by
+ * the Free Software Foundation. See <https://www.gnu.org/licenses/gpl-3.0.html>
+ *
+ * Written by Ivan Bravo Bravo <ivan@dreamnet.tech>, 2019.
+ */
+
+.button {
+  @apply inline-flex items-center justify-center;
+  @apply px-3 rounded bg-button text-snow font-semibold shadow;
+  @apply outline-none #{!important};
+  @include transition('background-color, color');
+  height: 35px;
+
+  &:hover,
+  &:active {
+    @apply bg-button-light;
+  }
+
+  &[disabled],
+  &.button--disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  &.button--xs {
+    @apply text-xs;
+    height: 25px;
+  }
+
+  &.button--sm {
+    @apply text-sm;
+    height: 30px;
+  }
+
+  &.button--xl {
+    @apply px-6 text-xl;
+    height: 45px;
+  }
+
+  &.button--active,
+  &.nuxt-link-exact-active {
+    @apply bg-primary;
+  }
+
+  &.button--primary {
+    @apply bg-primary text-night-darker;
+
+    &:hover,
+    &:active {
+      @apply bg-primary-dark;
+    }
+  }
+
+  &.button--warning {
+    @apply bg-warning text-night-darker;
+
+    &:hover,
+    &:active {
+      @apply bg-warning-dark;
+    }
+  }
+
+  &.button--danger {
+    @apply bg-danger text-night-darker;
+
+    &:hover,
+    &:active {
+      @apply bg-danger-dark;
+    }
+  }
+
+  &.button--success {
+    @apply bg-success text-night-darker;
+
+    &:hover,
+    &:active {
+      @apply bg-success-dark;
+    }
+  }
+
+  &.button--info {
+    @apply bg-blue text-night-darker;
+
+    &:hover,
+    &:active {
+      @apply bg-blue-dark;
+    }
+  }
+
+  .icon {
+    &:not(:last-child) {
+      @apply mr-2;
+    }
+  }
+}
+
+.buttons {
+  @apply flex flex-wrap;
+
+  .button {
+    @apply flex-1 rounded-none;
+
+    &:first-child {
+      @apply rounded-l;
+    }
+
+    &:last-child {
+      @apply rounded-r;
+    }
+  }
+}

@@ -1,0 +1,113 @@
+/*
+ * DreamTime.
+ * Copyright (C) DreamNet. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License 3.0 as published by
+ * the Free Software Foundation. See <https://www.gnu.org/licenses/gpl-3.0.html>
+ *
+ * Written by Ivan Bravo Bravo <ivan@dreamnet.tech>, 2019.
+ */
+
+.swal-content {
+  font-size: 16px;
+
+  p {
+    @apply mb-2;
+  }
+
+  a {
+    @apply text-primary underline;
+  }
+}
+
+.swal2-html-container {
+  padding: 0 1.8em;
+  line-height: 1.4em;
+
+  details {
+    @apply mt-6;
+
+    summary {
+      @apply mb-2 text-sm font-bold cursor-pointer outline-none;
+    }
+  }
+
+  pre {
+    @apply text-xs overflow-auto bg-black p-2 break-words whitespace-pre-wrap;
+    max-height: 100px;
+  }
+
+  a {
+    @apply underline text-white font-bold;
+  }
+}
+
+.swal2-footer {
+  code {
+    @apply text-center;
+  }
+}
+
+.swal2-popup {
+  @apply bg-menus-dark border border-menus-light border-solid shadow;
+  width: 40%;
+}
+
+.vue-slider {
+  @apply w-full #{!important};
+}
+
+.vue-slider-process {
+  @apply bg-primary-500 #{!important};
+}
+
+.introjs-tooltip {
+  @apply bg-dark-500-90 #{!important};
+  max-width: 400px !important;
+  min-width: 350px !important;
+}
+
+.introjs-arrow {
+  //@apply bg-dark-500-90 #{!important};
+}
+
+.introjs-helperLayer {
+  background-color: transparent !important;
+}
+
+.introjs-overlay {
+  backdrop-filter: blur(10px);
+}
+
+.tippy-content {
+  @apply px-6 py-3 bg-primary text-black shadow-lg;
+
+  p:not(:last-child) {
+    @apply mb-3;
+  }
+
+  code {
+    @apply bg-primary-dark;
+  }
+
+  ul {
+    @apply list-disc;
+
+    li {
+      @apply text-sm ml-3;
+
+      &:not(:last-child) {
+        @apply mb-2;
+      }
+    }
+  }
+}
+
+.tippy-arrow {
+  @apply text-primary;
+}
+
+.vue-slider-dot-tooltip-inner {
+  @apply bg-primary border-primary;
+}
