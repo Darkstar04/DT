@@ -7,15 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Setup
   setup:
     name: Setup
     runs-on: ${{ matrix.os }}
 
     strategy:
-      fail-fast: false
       matrix:
-        os: [windows-2019, ubuntu-18.04, macos-10.15]
+        os: [windows-2019, ubuntu-18.04]
 
     steps:
       - name: Install Node.js 14
@@ -36,7 +34,6 @@ jobs:
         working-directory: src
         run: yarn install --network-timeout 1000000
 
-  # Build frontend
   build-frontend:
     name: Frontend
     needs: setup
@@ -72,27 +69,22 @@ jobs:
             src/dist
             src/electron/dist
   
-  # Build Electron
   build-electron:
     name: "Electron: ${{ matrix.type }} - ${{ matrix.target }} (${{ matrix.os }})"
     needs: build-frontend
     runs-on: ${{ matrix.os }}
 
-    # Strategy
-    # (variables for multiple platforms)
-    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstrategy
     strategy:
-      fail-fast: false
       matrix:
-        os: [windows-2019, ubuntu-18.04, macos-10.15]
-        type: [installer, portable]
+        os: [windows-2019, ubuntu-18.04]
+        type: [installer]
         target: [default]
 
         include:
-          - target: AppImage # Linux: AppImage
+          - target: AppImage
             os: ubuntu-18.04
             type: installer
-          - target: rpm # Red Hat, Suse and Fedora Linux
+          - target: rpm
             os: ubuntu-18.04
             type: installer
 
@@ -115,9 +107,6 @@ jobs:
         with:
           name: dreamtime-dist
           path: src
-
-      - name: Display structure of downloaded files
-        run: ls
 
       - name: Build ENV
         working-directory: src
