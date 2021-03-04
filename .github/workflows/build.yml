@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - canary
-  workflow_dispatch:
 
 jobs:
   setup:
@@ -13,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-18.04]
+        os: [windows-latest]
 
     steps:
       - name: Install Node.js 14
@@ -32,12 +31,17 @@ jobs:
 
       - name: Install Dependencies
         working-directory: src
-        run: yarn install --network-timeout 1000000
+        run: yarn install
 
-  build-frontend:
-    name: Frontend
+  build-electron:
+    name: "Electron: ${{ matrix.type }} - ${{ matrix.target }} (${{ matrix.os }})"
     needs: setup
-    runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest]
+        type: [installer]
 
     steps:
       - name: Install Node.js 14
@@ -62,52 +66,6 @@ jobs:
         working-directory: src
         run: yarn run build:nuxt
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dreamtime-dist
-          path: |
-            src/dist
-            src/electron/dist
-  
-  build-electron:
-    name: "Electron: ${{ matrix.type }} - ${{ matrix.target }} (${{ matrix.os }})"
-    needs: build-frontend
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [windows-2019, ubuntu-18.04]
-        type: [installer]
-        target: [default]
-
-        include:
-          - target: AppImage
-            os: ubuntu-18.04
-            type: installer
-          - target: rpm
-            os: ubuntu-18.04
-            type: installer
-
-    steps:
-      - name: Install Node.js 14
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - uses: actions/checkout@v1
-
-      - uses: actions/cache@v2
-        env:
-          cache-name: setup-modules
-        with:
-          path: src/node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('src/yarn.lock') }}
-      
-      - uses: actions/download-artifact@v2
-        with:
-          name: dreamtime-dist
-          path: src
-
       - name: Build ENV
         working-directory: src
         env:
@@ -126,8 +84,3 @@ jobs:
           path: |
             dist/*.7z
             dist/*.exe
-            dist/*.snap
-            dist/*.AppImage
-            dist/*.rpm
-            dist/*.pacman
-            dist/*.dmg
