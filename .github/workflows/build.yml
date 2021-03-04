@@ -68,10 +68,6 @@ jobs:
 
       - name: Build ENV
         working-directory: src
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-          BUILD_PORTABLE: ${{ matrix.type == 'portable' }}
-          BUILD_TARGET: ${{ matrix.target }}
         run: yarn run build:env
 
       - name: Build Electron
